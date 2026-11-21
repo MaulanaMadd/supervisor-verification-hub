@@ -107,49 +107,48 @@ function SupervisorDirectoryContent() {
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm">
         <div className="max-w-3xl">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3 border border-blue-200 dark:border-blue-800">
-            <span>Thesis Supervisor Verification Platform</span>
+            <span>Platform Verifikasi Dosen Pembimbing</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Information Systems Thesis Supervisors
+            Direktori Dosen Pembimbing Tugas Akhir
           </h1>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Evaluate potential thesis advisors with transparent, audit-traceable data: research fit,
-            institutional information sources, verification scope, information freshness, and
-            recommended next actions before submitting your research proposal.
+            Evaluasi calon dosen pembimbing tugas akhir secara transparan berdasarkan kesesuaian bidang penelitian,
+            sumber informasi, cakupan verifikasi, keterbaruan data, serta rekomendasi tindak lanjut sebelum mengajukan proposal.
           </p>
         </div>
 
         {/* Quick Academic KPI Metrics */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 text-xs">
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
-            <span className="text-slate-400 block font-medium">Total Supervisors</span>
+            <span className="text-slate-400 block font-medium">Total Dosen Pembimbing</span>
             <span className="text-lg font-bold text-slate-900 dark:text-white">
-              {MOCK_SUPERVISORS.length} Faculty Members
+              {MOCK_SUPERVISORS.length} Dosen
             </span>
           </div>
 
           <div className="p-3 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/40">
             <span className="text-emerald-700 dark:text-emerald-400 block font-medium">
-              Officially Verified
+              Terverifikasi Resmi
             </span>
             <span className="text-lg font-bold text-emerald-800 dark:text-emerald-300">
-              {verifiedCount} Verified Profiles
+              {verifiedCount} Profil Terverifikasi
             </span>
           </div>
 
           <div className="p-3 rounded-xl bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-800/40">
             <span className="text-blue-700 dark:text-blue-400 block font-medium">
-              Open Advising Slots
+              Sisa Kuota Bimbingan
             </span>
             <span className="text-lg font-bold text-blue-800 dark:text-blue-300">
-              {openCapacityCount} Remaining Slots
+              Sisa {openCapacityCount} Kuota
             </span>
           </div>
 
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
-            <span className="text-slate-400 block font-medium">Academic Period</span>
+            <span className="text-slate-400 block font-medium">Periode Akademik</span>
             <span className="text-lg font-bold text-slate-900 dark:text-white">
-              Odd 2026/2027
+              Ganjil 2026/2027
             </span>
           </div>
         </div>
@@ -190,17 +189,17 @@ function SupervisorDirectoryContent() {
             </svg>
           </div>
           <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">
-            No matching supervisors found
+            Dosen pembimbing tidak ditemukan
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4">
-            No supervisor matched your current search &quot;{searchQuery}&quot; or filter criteria. Try adjusting the verification status or resetting all filters.
+            Tidak ada dosen pembimbing yang cocok dengan pencarian &quot;{searchQuery}&quot; atau kriteria filter saat ini. Coba sesuaikan status verifikasi atau atur ulang semua filter.
           </p>
           <button
             type="button"
             onClick={handleResetFilters}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm cursor-pointer"
           >
-            Reset All Filters
+            Atur Ulang Semua Filter
           </button>
         </div>
       )}
@@ -213,7 +212,7 @@ export default function SupervisorDirectoryPage() {
     <Suspense
       fallback={
         <div className="py-12 text-center text-slate-500 text-sm">
-          Loading Supervisor Directory...
+          Memuat Direktori Dosen Pembimbing...
         </div>
       }
     >

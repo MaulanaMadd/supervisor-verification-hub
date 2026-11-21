@@ -19,8 +19,8 @@ export default function ShortlistButton({
   const saved = isHydrated && isShortlisted(supervisorId);
 
   const label = saved
-    ? `Remove ${supervisorName} from shortlist`
-    : `Save ${supervisorName} to shortlist`;
+    ? `Hapus ${supervisorName} dari Kandidat Pilihan`
+    : `Tambahkan ${supervisorName} ke Kandidat Pilihan`;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export default function ShortlistButton({
             d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
           />
         </svg>
-        <span>{saved ? 'Shortlisted' : 'Save to Shortlist'}</span>
+        <span>{saved ? 'Dalam Kandidat Pilihan' : 'Tambahkan ke Kandidat Pilihan'}</span>
       </button>
     );
   }

@@ -71,9 +71,9 @@ export default function SupervisorCard({ supervisor, activeSearchQuery = '' }: S
         {/* Research Fit & Fields */}
         <div className="mb-4">
           <div className="text-[11px] uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500 mb-1.5 flex items-center justify-between">
-            <span>Research Fit & Expertise</span>
+            <span>Bidang Minat Penelitian</span>
             <span className="text-[10px] lowercase font-normal text-slate-400">
-              {supervisor.researchFields.length} topics
+              {supervisor.researchFields.length} bidang
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -102,18 +102,18 @@ export default function SupervisorCard({ supervisor, activeSearchQuery = '' }: S
               <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Verification Scope</span>
+              <span>Cakupan Verifikasi</span>
             </span>
             <span className="font-semibold text-slate-800 dark:text-slate-200">
-              {verifiedScopeCount}/{totalScopeCount} Dimensions Verified
+              {verifiedScopeCount}/{totalScopeCount} Dimensi Terverifikasi
             </span>
           </div>
 
           {/* Mini source citation */}
           <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate flex items-center space-x-1 mt-1">
-            <span className="font-medium text-slate-600 dark:text-slate-300">Source:</span>
+            <span className="font-medium text-slate-600 dark:text-slate-300">Sumber:</span>
             <span className="truncate" title={supervisor.informationSources[0]?.title}>
-              {supervisor.informationSources[0]?.title || 'Institutional records'}
+              {supervisor.informationSources[0]?.title || 'Catatan institusi'}
             </span>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function SupervisorCard({ supervisor, activeSearchQuery = '' }: S
               <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              <span className="truncate">Recommended Next Action</span>
+              <span className="truncate">Rekomendasi Tindak Lanjut</span>
             </div>
             <p className="text-xs text-blue-950/80 dark:text-blue-200/90 font-medium line-clamp-1">
               {supervisor.recommendedAction.headline}
@@ -137,7 +137,7 @@ export default function SupervisorCard({ supervisor, activeSearchQuery = '' }: S
             href={`/supervisors/${supervisor.id}`}
             className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-semibold text-white bg-slate-900 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
-            <span>View Verification Profile</span>
+            <span>Lihat Profil Verifikasi</span>
             <svg
               className="w-3.5 h-3.5 ml-1.5 transform group-hover:translate-x-1 transition-transform"
               fill="none"

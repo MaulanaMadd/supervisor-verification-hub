@@ -26,11 +26,11 @@ export type DecisionStatus =
   | 'not-pursuing';
 
 export const DECISION_STATUS_OPTIONS: { value: DecisionStatus; label: string }[] = [
-  { value: 'considering', label: 'Considering' },
-  { value: 'priority', label: 'Priority Candidate' },
-  { value: 'contacted', label: 'Contacted' },
-  { value: 'meeting-scheduled', label: 'Meeting Scheduled' },
-  { value: 'not-pursuing', label: 'Not Pursuing' },
+  { value: 'considering', label: 'Dipertimbangkan' },
+  { value: 'priority', label: 'Kandidat Prioritas' },
+  { value: 'contacted', label: 'Sudah Dihubungi' },
+  { value: 'meeting-scheduled', label: 'Pertemuan Terjadwal' },
+  { value: 'not-pursuing', label: 'Tidak Dilanjutkan' },
 ];
 
 const VALID_DECISION_STATUSES = new Set<DecisionStatus>(
@@ -411,7 +411,7 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       if (current.includes(supervisorId)) return;
       writeShortlistIds([...current, supervisorId]);
       showFeedback(
-        supervisorName ? `Saved ${supervisorName} to shortlist` : 'Saved to shortlist',
+        supervisorName ? `Menambahkan ${supervisorName} ke Kandidat Pilihan` : 'Ditambahkan ke Kandidat Pilihan',
         'added'
       );
     },
@@ -425,7 +425,7 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       writeShortlistIds(current.filter((id) => id !== supervisorId));
       cleanupCandidateMetadata([supervisorId]);
       showFeedback(
-        supervisorName ? `Removed ${supervisorName} from shortlist` : 'Removed from shortlist',
+        supervisorName ? `Menghapus ${supervisorName} dari Kandidat Pilihan` : 'Dihapus dari Kandidat Pilihan',
         'removed'
       );
     },
@@ -448,7 +448,7 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
     const current = getClientSnapshot();
     writeShortlistIds([]);
     cleanupCandidateMetadata(current);
-    showFeedback('Cleared all shortlisted supervisors', 'removed');
+    showFeedback('Semua kandidat pilihan dihapus', 'removed');
   }, [showFeedback]);
 
   const getDecisionStatus = useCallback(
@@ -464,7 +464,7 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       writeDecisionStatuses(next);
       const label = DECISION_STATUS_OPTIONS.find((o) => o.value === status)?.label ?? status;
       showFeedback(
-        supervisorName ? `Updated ${supervisorName} status to ${label}` : `Status set to ${label}`,
+        supervisorName ? `Status ${supervisorName} diubah menjadi ${label}` : `Status diubah menjadi ${label}`,
         'added'
       );
     },
@@ -489,7 +489,10 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       }
       writeDecisionNotes(next);
       if (notify) {
-        showFeedback(trimmed.length > 0 ? 'Decision note saved' : 'Decision note cleared', 'added');
+        showFeedback(
+          trimmed.length > 0 ? 'Catatan pertimbangan disimpan' : 'Catatan pertimbangan dihapus',
+          'added'
+        );
       }
     },
     [showFeedback]

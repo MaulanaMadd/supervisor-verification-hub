@@ -9,10 +9,10 @@ export default function SupervisorNotFound() {
         </svg>
       </div>
       <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-        Supervisor Profile Not Found
+        Profil Dosen Pembimbing Tidak Ditemukan
       </h1>
       <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-        The supervisor profile you requested is not listed in the current semester verification database or the identifier is invalid.
+        Profil dosen pembimbing yang Anda cari tidak terdaftar pada data semester ini atau tautan tidak valid.
       </p>
       <Link
         href="/"
@@ -21,7 +21,7 @@ export default function SupervisorNotFound() {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        <span>Back to Supervisor Directory</span>
+        <span>Kembali ke Direktori Dosen</span>
       </Link>
     </div>
   );

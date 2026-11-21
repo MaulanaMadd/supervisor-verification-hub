@@ -107,7 +107,7 @@ NIM: [NIM]`;
               <span>Status Kuota & Regulasi Departemen</span>
             </div>
             <p className="leading-relaxed">
-              Kuota reguler {supervisor.name} saat ini <strong>terisi penuh (4/4 mahasiswa)</strong>. Usulan penambahan kuota bimbingan sedang diajukan ke Senat Akademik. Mahasiswa baru dapat dibimbing apabila didampingi oleh <strong>Dosen Pembimbing Pendamping (Co-Supervisor)</strong> yang terdaftar dan memiliki kuota tersedia.
+              Kuota reguler {supervisor.name} saat ini <strong>terisi penuh ({supervisor.quota.filled} dari {supervisor.quota.total} mahasiswa)</strong>. Usulan penambahan kuota bimbingan sedang diajukan ke Senat Akademik. Mahasiswa baru dapat dibimbing apabila didampingi oleh <strong>Dosen Pembimbing Pendamping (Co-Supervisor)</strong> yang terdaftar dan memiliki kuota tersedia.
             </p>
           </div>
 

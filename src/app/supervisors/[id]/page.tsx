@@ -20,13 +20,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!supervisor) {
     return {
-      title: 'Supervisor Not Found | SVH',
+      title: 'Dosen Pembimbing Tidak Ditemukan | SVH',
     };
   }
 
   return {
-    title: `${supervisor.name} - Verification Profile | SVH`,
-    description: `Audit verification profile, research scope, information sources, and recommended next actions for ${supervisor.name}.`,
+    title: `${supervisor.name} - Profil Verifikasi | SVH`,
+    description: `Profil verifikasi, cakupan informasi, sumber data, ketersediaan bimbingan, dan rekomendasi tindak lanjut untuk ${supervisor.name}.`,
   };
 }
 
@@ -46,7 +46,7 @@ export default function SupervisorDetailPage({ params }: PageProps) {
     <Suspense
       fallback={
         <div className="py-12 text-center text-slate-500 text-sm">
-          Loading Supervisor Profile...
+          Memuat Profil Dosen Pembimbing...
         </div>
       }
     >

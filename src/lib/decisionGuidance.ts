@@ -1,4 +1,5 @@
 import { Supervisor } from '@/types/supervisor';
+import { AVAILABILITY_LABELS_ID, VERIFICATION_LABELS_ID } from '@/lib/i18n';
 
 export type GuidanceTone = 'emerald' | 'indigo' | 'amber' | 'rose' | 'slate';
 
@@ -32,45 +33,46 @@ export function evaluateCandidateGuidance(supervisor: Supervisor): CandidateGuid
   const verifiedScopeCount = supervisor.verificationScope.filter((s) => s.isVerified).length;
   const totalScopeCount = supervisor.verificationScope.length;
   const quotaScopeItem = supervisor.verificationScope.find((s) => s.id === 'scope-quota');
+  const verificationLabel = VERIFICATION_LABELS_ID[supervisor.verificationStatus];
 
   // 1. Verification & freshness facts
   if (supervisor.verificationStatus === 'verified') {
     factualObservations.push(
-      `Officially verified (${verifiedScopeCount}/${totalScopeCount} scope dimensions verified; updated ${supervisor.freshness.daysAgo} days ago).`
+      `Terverifikasi resmi (${verifiedScopeCount}/${totalScopeCount} dimensi terverifikasi; diperbarui ${supervisor.freshness.daysAgo} hari lalu).`
     );
   } else {
     factualObservations.push(
-      `Verification is "${supervisor.verificationStatusLabel}" (${verifiedScopeCount}/${totalScopeCount} scope dimensions verified; updated ${supervisor.freshness.daysAgo} days ago).`
+      `Status verifikasi "${verificationLabel}" (${verifiedScopeCount}/${totalScopeCount} dimensi terverifikasi; diperbarui ${supervisor.freshness.daysAgo} hari lalu).`
     );
   }
 
   // 2. Availability & quota facts
   if (supervisor.availabilityStatus === 'on-sabbatical') {
     factualObservations.push(
-      `Currently on sabbatical/leave (${supervisor.availabilityLabel}).`
+      `Sedang cuti akademik (${AVAILABILITY_LABELS_ID[supervisor.availabilityStatus]}).`
     );
   } else if (supervisor.availabilityStatus === 'full') {
     factualObservations.push(
-      `Quota is currently full (${supervisor.quota.filled}/${supervisor.quota.total} filled; ${supervisor.availabilityLabel}).`
+      `Kuota saat ini penuh (${supervisor.quota.filled} dari ${supervisor.quota.total} terisi).`
     );
   } else if (supervisor.availabilityStatus === 'limited') {
     factualObservations.push(
-      `Limited advising capacity (${supervisor.quota.remaining} of ${supervisor.quota.total} slot remaining).`
+      `Ketersediaan terbatas (sisa ${supervisor.quota.remaining} dari ${supervisor.quota.total} kuota).`
     );
   } else {
     const quotaCaveat =
       quotaScopeItem && !quotaScopeItem.isVerified
-        ? ' — note: quota slot count is not yet centrally verified'
+        ? ' — catatan: jumlah sisa kuota belum terverifikasi di tingkat departemen'
         : '';
     factualObservations.push(
-      `Advising availability reported as open (${supervisor.quota.remaining} of ${supervisor.quota.total} slots remaining${quotaCaveat}).`
+      `Ketersediaan dilaporkan terbuka (sisa ${supervisor.quota.remaining} dari ${supervisor.quota.total} kuota${quotaCaveat}).`
     );
   }
 
   // 3. Methodologies count fact
   if (supervisor.methodologies.length > 0) {
     factualObservations.push(
-      `Documented methodologies include ${supervisor.methodologies.slice(0, 2).join(' and ')}.`
+      `Metodologi yang digunakan meliputi ${supervisor.methodologies.slice(0, 2).join(' dan ')}.`
     );
   }
 
@@ -86,20 +88,20 @@ export function evaluateCandidateGuidance(supervisor: Supervisor): CandidateGuid
     supervisor.recommendedAction.actionType === 'waitlist'
   ) {
     suggestedAction = {
-      label: 'Explore Alternative Supervisors',
+      label: 'Cari Dosen Pembimbing Alternatif',
       rationale:
-        'Because this supervisor is currently on sabbatical with 0 open slots, avoid submitting a primary proposal this semester and explore active faculty in related research fields.',
+        'Dosen sedang menjalani cuti akademik dengan 0 kuota tersedia. Hindari mengajukan proposal utama pada semester ini dan jelajahi dosen aktif di bidang penelitian terkait.',
       href: exploreHref,
-      ctaLabel: 'Browse Related Supervisors',
+      ctaLabel: 'Jelajahi Dosen Alternatif',
       tone: 'slate',
     };
   } else if (supervisor.recommendedAction.actionType === 'co-supervisor-required') {
     suggestedAction = {
-      label: 'Check Quota Expansion & Co-Supervisor Option',
+      label: 'Cek Penambahan Kuota & Skema Co-Supervisor',
       rationale:
-        'Standard advising capacity is full (0 remaining) with an expansion pending senate review. Review co-supervisor guidance before preparing a formal submission.',
+        'Kuota reguler saat ini penuh (sisa 0 kuota) dengan usulan penambahan kuota yang masih menunggu persetujuan senat. Tinjau panduan co-supervisor sebelum mengajukan proposal.',
       href: detailHref,
-      ctaLabel: 'Open Co-Supervisor Guidance',
+      ctaLabel: 'Buka Panduan Co-Supervisor',
       tone: 'amber',
     };
   } else if (
@@ -107,10 +109,10 @@ export function evaluateCandidateGuidance(supervisor: Supervisor): CandidateGuid
     supervisor.verificationStatus === 'pending'
   ) {
     suggestedAction = {
-      label: 'Verify Current Status Before Contacting',
-      rationale: `Profile verification is "${supervisor.verificationStatusLabel}". Confirm current advising availability directly before committing to a full proposal.`,
+      label: 'Verifikasi Status Sebelum Menghubungi',
+      rationale: `Status verifikasi profil masih "${verificationLabel}". Konfirmasikan ketersediaan bimbingan secara langsung sebelum menyusun proposal lengkap.`,
       href: detailHref,
-      ctaLabel: 'Review Verification Details',
+      ctaLabel: 'Tinjau Detail Verifikasi',
       tone: 'rose',
     };
   } else if (
@@ -118,19 +120,19 @@ export function evaluateCandidateGuidance(supervisor: Supervisor): CandidateGuid
     (quotaScopeItem && !quotaScopeItem.isVerified)
   ) {
     suggestedAction = {
-      label: 'Send Inquiry Email & Confirm Slot Status',
+      label: 'Kirim Email Pertanyaan & Konfirmasi Kuota',
       rationale:
-        'Advising availability appears open, but quota information is self-reported and not yet centrally verified. Send a brief inquiry to confirm remaining slots first.',
+        'Ketersediaan tampak terbuka, namun informasi kuota berasal dari laporan mandiri dan belum terverifikasi pusat. Kirimkan email singkat untuk memastikan sisa kuota terlebih dahulu.',
       href: detailHref,
-      ctaLabel: 'Open Email Inquiry Hub',
+      ctaLabel: 'Buka Pembuat Draf Email',
       tone: 'amber',
     };
   } else if (supervisor.recommendedAction.actionType === 'office-visit') {
     suggestedAction = {
-      label: 'Schedule / Prepare Office Consultation',
-      rationale: `Profile is officially verified with ${supervisor.quota.remaining} open slot(s). Use the consultation planner to prepare your outline before attending office hours.`,
+      label: 'Jadwalkan / Siapkan Konsultasi Tatap Muka',
+      rationale: `Profil telah terverifikasi resmi dengan sisa ${supervisor.quota.remaining} kuota. Gunakan perencana konsultasi untuk menyiapkan ringkasan topik sebelum menemui dosen pada jam kantor.`,
       href: detailHref,
-      ctaLabel: 'Open Consultation Planner',
+      ctaLabel: 'Buka Perencana Konsultasi',
       tone: 'indigo',
     };
   } else if (
@@ -138,19 +140,19 @@ export function evaluateCandidateGuidance(supervisor: Supervisor): CandidateGuid
     supervisor.availabilityStatus === 'limited'
   ) {
     suggestedAction = {
-      label: 'Prepare Pre-Proposal & Contact Soon',
-      rationale: `Profile is officially verified, but only ${supervisor.quota.remaining} slot remains. Prepare your pre-proposal draft promptly to avoid missing capacity.`,
+      label: 'Siapkan Draf Pre-Proposal & Segera Hubungi',
+      rationale: `Profil telah terverifikasi resmi, namun hanya tersisa ${supervisor.quota.remaining} kuota. Siapkan draf pre-proposal lebih awal agar tidak kehabisan kuota bimbingan.`,
       href: detailHref,
-      ctaLabel: 'Open Proposal Draft Hub',
+      ctaLabel: 'Buka Pembuat Draf Pre-Proposal',
       tone: 'emerald',
     };
   } else {
     suggestedAction = {
-      label: 'Prepare Inquiry & Contact Supervisor',
+      label: 'Siapkan Pengajuan & Hubungi Dosen',
       rationale:
-        'Profile information is verified and advising capacity is available. Use the Action Execution Hub on the profile page to draft your outreach.',
+        'Informasi profil telah terverifikasi dan kuota bimbingan tersedia. Gunakan Pusat Tindak Lanjut pada halaman profil untuk menyusun komunikasi resmi.',
       href: detailHref,
-      ctaLabel: 'Open Action Execution Hub',
+      ctaLabel: 'Buka Pusat Tindak Lanjut',
       tone: 'emerald',
     };
   }
@@ -188,23 +190,23 @@ export function generateComparisonInsights(supervisors: Supervisor[]): Compariso
   const availabilityParts: string[] = [];
   if (openList.length > 0) {
     availabilityParts.push(
-      `Open: ${openList.map((s) => `${s.name} (${s.quota.remaining} left)`).join(', ')}`
+      `Tersedia: ${openList.map((s) => `${s.name} (sisa ${s.quota.remaining} kuota)`).join(', ')}`
     );
   }
   if (limitedList.length > 0) {
     availabilityParts.push(
-      `Limited: ${limitedList.map((s) => `${s.name} (${s.availabilityLabel})`).join(', ')}`
+      `Terbatas: ${limitedList.map((s) => `${s.name} (sisa ${s.quota.remaining} dari ${s.quota.total} kuota)`).join(', ')}`
     );
   }
   if (unavailableList.length > 0) {
     availabilityParts.push(
-      `Unavailable/Full: ${unavailableList.map((s) => `${s.name} (${s.availabilityLabel})`).join(', ')}`
+      `Penuh/Cuti: ${unavailableList.map((s) => `${s.name} (${AVAILABILITY_LABELS_ID[s.availabilityStatus]})`).join(', ')}`
     );
   }
   if (availabilityParts.length > 0) {
     insights.push({
       category: 'factual',
-      title: 'Advising Availability Contrast',
+      title: 'Perbandingan Ketersediaan Bimbingan',
       detail: availabilityParts.join('. ') + '.',
     });
   }
@@ -215,20 +217,20 @@ export function generateComparisonInsights(supervisors: Supervisor[]): Compariso
   if (verifiedList.length > 0 && unverifiedList.length > 0) {
     insights.push({
       category: 'factual',
-      title: 'Verification Reliability Difference',
-      detail: `${verifiedList.map((s) => s.name).join(', ')} ${verifiedList.length === 1 ? 'is' : 'are'} Officially Verified, whereas ${unverifiedList.map((s) => `${s.name} (${s.verificationStatusLabel})`).join(', ')} ${unverifiedList.length === 1 ? 'has' : 'have'} incomplete or unratified verification.`,
+      title: 'Perbedaan Status Verifikasi',
+      detail: `${verifiedList.map((s) => s.name).join(', ')} telah Terverifikasi Resmi, sedangkan ${unverifiedList.map((s) => `${s.name} (${VERIFICATION_LABELS_ID[s.verificationStatus]})`).join(', ')} masih memerlukan konfirmasi langsung atas data terbaru.`,
     });
   } else if (verifiedList.length === supervisors.length) {
     insights.push({
       category: 'factual',
-      title: 'Verification Status',
-      detail: 'All compared supervisors are Officially Verified with institutional records.',
+      title: 'Status Verifikasi',
+      detail: 'Seluruh dosen pembimbing yang dibandingkan berstatus Terverifikasi Resmi.',
     });
   } else {
     insights.push({
       category: 'consideration',
-      title: 'Verification Caution',
-      detail: `None of the compared profiles are Officially Verified (${supervisors.map((s) => `${s.name}: ${s.verificationStatusLabel}`).join('; ')}). Confirm slot availability directly before submitting.`,
+      title: 'Perhatian Verifikasi',
+      detail: `Belum ada profil yang berstatus Terverifikasi Resmi (${supervisors.map((s) => `${s.name}: ${VERIFICATION_LABELS_ID[s.verificationStatus]}`).join('; ')}). Konfirmasikan sisa kuota secara langsung sebelum mengajukan proposal.`,
     });
   }
 
@@ -237,20 +239,20 @@ export function generateComparisonInsights(supervisors: Supervisor[]): Compariso
   const sharedMethods = findSharedItems(supervisors.map((s) => s.methodologies));
   insights.push({
     category: 'factual',
-    title: 'Research & Methodology Overlap',
+    title: 'Kesamaan Bidang Penelitian & Metodologi',
     detail:
       sharedFields.size > 0 || sharedMethods.size > 0
         ? [
             sharedFields.size > 0
-              ? `Shared research fields: ${Array.from(sharedFields).join(', ')}`
-              : 'Distinct research fields across candidates',
+              ? `Bidang penelitian yang sama: ${Array.from(sharedFields).join(', ')}`
+              : 'Bidang penelitian antar kandidat berbeda',
             sharedMethods.size > 0
-              ? `Shared methodologies: ${Array.from(sharedMethods).join(', ')}`
+              ? `Metodologi yang sama: ${Array.from(sharedMethods).join(', ')}`
               : null,
           ]
             .filter(Boolean)
             .join('. ') + '.'
-        : 'No overlapping research field tags or methodologies—each supervisor covers a distinct specialization.',
+        : 'Tidak ada irisan bidang penelitian atau metodologi yang identik—setiap dosen memiliki spesialisasi riset yang berbeda.',
   });
 
   // 4. Special Conditions / Action Considerations (Advisory)
@@ -258,26 +260,26 @@ export function generateComparisonInsights(supervisors: Supervisor[]): Compariso
   for (const s of supervisors) {
     if (s.availabilityStatus === 'on-sabbatical' || s.recommendedAction.actionType === 'waitlist') {
       considerations.push(
-        `${s.name} is on sabbatical (consider exploring active alternatives).`
+        `${s.name} sedang cuti akademik (disarankan mencari alternatif dosen aktif).`
       );
     } else if (s.recommendedAction.actionType === 'co-supervisor-required') {
       considerations.push(
-        `${s.name} may require a co-supervisor or senate quota expansion approval.`
+        `${s.name} kemungkinan memerlukan skema co-supervisor atau persetujuan penambahan kuota senat.`
       );
     } else if (s.availabilityStatus === 'limited') {
       considerations.push(
-        `${s.name} has limited remaining capacity (${s.quota.remaining} slot)—consider contacting promptly if their topic fits.`
+        `${s.name} memiliki sisa kuota terbatas (sisa ${s.quota.remaining} kuota)—pertimbangkan untuk segera menghubungi jika topik sesuai.`
       );
     } else if (s.verificationStatus === 'self-reported') {
       considerations.push(
-        `${s.name} reports open slots, but quota data is self-reported—verify availability when emailing.`
+        `${s.name} melaporkan kuota tersedia melalui laporan mandiri—konfirmasikan ketersediaan saat mengirim email.`
       );
     }
   }
   if (considerations.length > 0) {
     insights.push({
       category: 'consideration',
-      title: 'Decision Considerations',
+      title: 'Hal yang Perlu Dipertimbangkan',
       detail: considerations.join(' '),
     });
   }

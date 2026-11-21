@@ -36,3 +36,23 @@ Welcome to the documentation and evidence package for the **Supervisor Verificat
 | 16 | `16-mobile-dashboard.png` — Mobile Dashboard | Mobile (`375×812`) |
 | 17 | `17-mobile-supervisor-detail.png` — Mobile Supervisor Detail Page | Mobile (`375×812`) |
 | 18 | `18-mobile-comparison.png` — Mobile Stacked Comparison Cards | Mobile (`375×812`, full page) |
+
+## Localized Indonesian UI Evidence (`docs/evidence/screenshots/id/`)
+
+Captured from the production build (`npm start`) on branch `feature/indonesian-localization`:
+
+| # | Screenshot | Viewport |
+| :-: | --- | --- |
+| 01 | `01-beranda-dashboard.png` — Beranda & Direktori Dosen Pembimbing | Desktop (`1280×900`) |
+| 02 | `02-pencarian-filter.png` — Pencarian Langsung & Filter (`TOGAF`) | Desktop (`1280×900`) |
+| 03 | `03-detail-dosen.png` — Halaman Profil Verifikasi Dosen | Desktop (`1280×900`) |
+| 04 | `04-pusat-tindak-lanjut.png` — Pusat Tindak Lanjut & Prasyarat | Desktop (`1280×900`) |
+| 05 | `05-draf-email-pengajuan.png` — Pembuat Draf Pre-Proposal & Email | Desktop (`1280×900`) |
+| 06 | `06-perencana-konsultasi.png` — Perencana Konsultasi Tatap Muka | Desktop (`1280×900`) |
+| 07 | `07-kandidat-pilihan.png` — Kandidat Pilihan, Status & Catatan | Desktop (`1280×900`) |
+| 08 | `08-perbandingan-2-dosen.png` — Perbandingan 2 Dosen Pembimbing | Desktop (`1280×900`, full page) |
+| 09 | `09-perbandingan-3-dosen.png` — Perbandingan 3 Dosen Pembimbing | Desktop (`1280×900`, full page) |
+| 10 | `10-panduan-keputusan.png` — Perbedaan Utama & Panduan Keputusan (`Fakta` / `Saran`) | Desktop (`1280×900`) |
+| 11 | `11-mobile-beranda.png` — Beranda Mobile | Mobile (`375×812`) |
+| 12 | `12-mobile-detail-dosen.png` — Profil Dosen Mobile | Mobile (`375×812`) |
+| 13 | `13-mobile-perbandingan.png` — Perbandingan Mobile | Mobile (`375×812`, full page) |

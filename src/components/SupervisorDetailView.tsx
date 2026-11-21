@@ -51,11 +51,11 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Supervisor Directory</span>
+          <span>Kembali ke Direktori Dosen</span>
         </Link>
 
         <div className="flex items-center space-x-2 text-xs text-slate-400">
-          <span>Profile ID:</span>
+          <span>ID Profil:</span>
           <code className="bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded font-mono text-slate-600 dark:text-slate-300">
             {supervisor.id}
           </code>
@@ -112,7 +112,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
-                <span>Office Location</span>
+                <span>Lokasi Ruang Kerja</span>
               </div>
               <div className="font-semibold text-slate-800 dark:text-slate-200">
                 {supervisor.roomLocation}
@@ -124,7 +124,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>Office Hours Consultation</span>
+                <span>Jam Konsultasi Kantor</span>
               </div>
               <div className="font-semibold text-slate-800 dark:text-slate-200">
                 {supervisor.officeHours}
@@ -136,7 +136,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>Official Institutional Email</span>
+                <span>Email Resmi Institusi</span>
               </div>
               <div className="font-mono text-blue-600 dark:text-blue-400 font-medium truncate">
                 <a href={`mailto:${supervisor.email}`} className="hover:underline">
@@ -156,11 +156,11 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
               <svg className="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              <span>Recommended Next Action for Students</span>
+              <span>Rekomendasi Tindak Lanjut Mahasiswa</span>
             </div>
 
             <span className="text-xs bg-white/10 px-2.5 py-1 rounded text-blue-100 font-mono">
-              Action: {supervisor.recommendedAction.actionTypeLabel}
+              Tindakan: {supervisor.recommendedAction.actionTypeLabel}
             </span>
           </div>
 
@@ -175,7 +175,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
         {/* Step by step action roadmap */}
         <div className="bg-slate-900/60 rounded-xl p-5 border border-blue-700/50 space-y-3">
           <div className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">
-            Action Steps Before Contacting Supervisor:
+            Langkah Persiapan Sebelum Menghubungi Dosen:
           </div>
           <ol className="space-y-2.5 text-xs sm:text-sm text-slate-100">
             {supervisor.recommendedAction.actionSteps.map((step, idx) => (
@@ -194,7 +194,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-blue-200">
-                Action Execution Hub
+                Pusat Tindak Lanjut
               </div>
               <p className="text-xs text-blue-100/90 mt-0.5">
                 {isSabbatical
@@ -291,15 +291,15 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span>Verification Scope</span>
+                <span>Cakupan Verifikasi</span>
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Audit dimensions checked by faculty verification officers
+                Dimensi audit yang diperiksa dalam verifikasi profil
               </p>
             </div>
             <div className="text-right">
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-2 py-1 rounded">
-                {verifiedScopeCount} of {totalScopeCount} Confirmed
+                {verifiedScopeCount} dari {totalScopeCount} Terkonfirmasi
               </span>
             </div>
           </div>
@@ -334,7 +334,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                         : 'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300'
                     }`}
                   >
-                    {scope.isVerified ? 'Verified' : 'Unverified / Self-Reported'}
+                    {scope.isVerified ? 'Terverifikasi' : 'Belum Terverifikasi'}
                   </span>
                 </div>
                 <p className="text-slate-600 dark:text-slate-300 pl-5 text-[11px] leading-relaxed">
@@ -345,7 +345,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
           </div>
 
           <div className="mt-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 text-xs text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-800">
-            <span className="font-semibold text-slate-700 dark:text-slate-300">Verification Policy:</span>{' '}
+            <span className="font-semibold text-slate-700 dark:text-slate-300">Keterangan Verifikasi:</span>{' '}
             {supervisor.verificationStatusDescription}
           </div>
         </div>
@@ -358,10 +358,10 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <span>Information Sources & Freshness</span>
+                <span>Sumber Informasi & Keterbaruan</span>
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Traceable evidence records verifying this profile
+                Catatan sumber rujukan yang mendukung profil ini
               </p>
             </div>
             <FreshnessBadge freshness={supervisor.freshness} />
@@ -384,16 +384,16 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
 
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 space-y-0.5 mt-1">
                   <div>
-                    <span className="font-medium text-slate-600 dark:text-slate-300">Auditing Authority:</span> {source.authority}
+                    <span className="font-medium text-slate-600 dark:text-slate-300">Otoritas Sumber:</span> {source.authority}
                   </div>
                   {source.referenceCode && (
                     <div>
-                      <span className="font-medium text-slate-600 dark:text-slate-300">Reference:</span>{' '}
+                      <span className="font-medium text-slate-600 dark:text-slate-300">Kode Referensi:</span>{' '}
                       <span className="font-mono text-slate-600 dark:text-slate-300">{source.referenceCode}</span>
                     </div>
                   )}
                   <div>
-                    <span className="font-medium text-slate-600 dark:text-slate-300">Retrieved:</span> {source.dateRetrieved}
+                    <span className="font-medium text-slate-600 dark:text-slate-300">Tanggal Diambil:</span> {source.dateRetrieved}
                   </div>
                 </div>
               </div>
@@ -402,9 +402,9 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
 
           {/* Audit Timestamp Summary */}
           <div className="mt-4 p-3 rounded-lg bg-blue-50/50 dark:bg-blue-950/20 text-xs border border-blue-100 dark:border-blue-900/40 flex items-center justify-between">
-            <span className="text-slate-600 dark:text-slate-300">Last Verified Audit Date:</span>
+            <span className="text-slate-600 dark:text-slate-300">Pembaruan Terakhir:</span>
             <span className="font-semibold text-blue-700 dark:text-blue-300 font-mono">
-              {supervisor.freshness.lastUpdatedDate} ({supervisor.freshness.freshnessLabel})
+              {supervisor.freshness.lastUpdatedDate} ({supervisor.freshness.daysAgo} hari lalu)
             </span>
           </div>
         </div>
@@ -414,17 +414,17 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-6">
         <div>
           <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1">
-            Research Fit & Thesis Focus Areas
+            Bidang Minat Penelitian & Fokus Tugas Akhir
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Evaluate your thesis topic match against verified themes and target methodologies
+            Evaluasi keselarasan topik penelitian Anda dengan bidang keahlian dan metodologi dosen
           </p>
         </div>
 
         {/* Primary Research Fields */}
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-            Primary Research Fields
+            Bidang Penelitian Utama
           </div>
           <div className="flex flex-wrap gap-2">
             {supervisor.researchFields.map((field, idx) => (
@@ -441,7 +441,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
         {/* Thesis Topic Examples */}
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-            Recommended Thesis Focus Areas & Past Examples
+            Area Fokus Tugas Akhir & Contoh Topik
           </div>
           <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
             {supervisor.thesisFocusAreas.map((topic, idx) => (
@@ -459,7 +459,7 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
         {/* Methodologies */}
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-            Expected Methodological Frameworks
+            Metodologi & Kerangka Kerja yang Digunakan
           </div>
           <div className="flex flex-wrap gap-2">
             {supervisor.methodologies.map((meth, idx) => (
@@ -479,10 +479,10 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div>
             <h2 className="text-base font-bold text-slate-900 dark:text-white">
-              Advising Quota & Capacity Breakdown
+              Rincian Kuota Bimbingan
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Department quota allocation for {supervisor.quota.semester}
+              Alokasi kuota bimbingan departemen untuk {supervisor.quota.semester}
             </p>
           </div>
           <AvailabilityBadge status={supervisor.availabilityStatus} quota={supervisor.quota} />
@@ -496,34 +496,34 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
                 style={{
                   width: `${(supervisor.quota.filled / supervisor.quota.total) * 100}%`,
                 }}
-                title={`${supervisor.quota.filled} slots filled`}
+                title={`${supervisor.quota.filled} kuota terisi`}
               />
               <div
                 className="bg-emerald-500/80 h-full transition-all duration-500"
                 style={{
                   width: `${(supervisor.quota.remaining / supervisor.quota.total) * 100}%`,
                 }}
-                title={`${supervisor.quota.remaining} slots open`}
+                title={`Sisa ${supervisor.quota.remaining} kuota`}
               />
             </div>
 
-            <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
               <span className="flex items-center space-x-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block" />
-                <span>Occupied Slots: {supervisor.quota.filled}</span>
+                <span>Mahasiswa yang Dibimbing: {supervisor.quota.filled}</span>
               </span>
               <span className="flex items-center space-x-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
                 <span className="font-semibold text-emerald-700 dark:text-emerald-400">
-                  Available Slots: {supervisor.quota.remaining}
+                  Sisa Kuota: {supervisor.quota.remaining}
                 </span>
               </span>
-              <span>Total Cap: {supervisor.quota.total} Students</span>
+              <span>Total Kuota: {supervisor.quota.total} Mahasiswa</span>
             </div>
           </div>
         ) : (
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-600 dark:text-slate-300">
-            Advising quota is currently inactive (0 slots) due to faculty leave or overseas fellowship.
+            Kuota bimbingan saat ini tidak aktif (0 kuota) karena dosen sedang menjalani cuti akademik atau program riset luar negeri.
           </div>
         )}
       </div>

@@ -13,7 +13,7 @@ export default function VerificationBadge({
 }: VerificationBadgeProps) {
   const configs = {
     verified: {
-      label: 'Officially Verified',
+      label: 'Terverifikasi Resmi',
       bgClass: 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-700',
       dotClass: 'bg-emerald-500',
       icon: (
@@ -23,7 +23,7 @@ export default function VerificationBadge({
       ),
     },
     'self-reported': {
-      label: 'Self-Reported',
+      label: 'Laporan Mandiri',
       bgClass: 'bg-sky-50 text-sky-800 border-sky-300 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-700',
       dotClass: 'bg-sky-500',
       icon: (
@@ -33,7 +33,7 @@ export default function VerificationBadge({
       ),
     },
     pending: {
-      label: 'Pending Review',
+      label: 'Menunggu Verifikasi',
       bgClass: 'bg-amber-50 text-amber-800 border-amber-300 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-700',
       dotClass: 'bg-amber-500',
       icon: (
@@ -43,7 +43,7 @@ export default function VerificationBadge({
       ),
     },
     'needs-update': {
-      label: 'Stale / Needs Update',
+      label: 'Perlu Pembaruan',
       bgClass: 'bg-rose-50 text-rose-800 border-rose-300 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-700',
       dotClass: 'bg-rose-500',
       icon: (

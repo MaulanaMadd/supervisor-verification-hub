@@ -4,9 +4,9 @@ import Navbar from '@/components/Navbar';
 import { ShortlistProvider } from '@/context/ShortlistContext';
 
 export const metadata: Metadata = {
-  title: 'Supervisor Verification Hub (SVH) | Information Systems',
+  title: 'Supervisor Verification Hub (SVH) | Sistem Informasi',
   description:
-    'A verification platform for Information Systems students evaluating potential thesis supervisors based on research fit, verification status, verification scope, information sources, freshness, and recommended next actions.',
+    'Platform verifikasi dan panduan pengambilan keputusan bagi mahasiswa Sistem Informasi dalam mengevaluasi calon dosen pembimbing tugas akhir secara transparan.',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="id" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans">
         <ShortlistProvider>
           <Navbar />
@@ -26,16 +26,16 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
               <div>
                 <p className="font-semibold text-slate-700 dark:text-slate-300">
-                  Supervisor Verification Hub (SVH) • Q3.04 Capstone Prototype
+                  Supervisor Verification Hub (SVH) • Prototipe Capstone Q3.04
                 </p>
                 <p className="text-[11px] text-slate-400 mt-0.5">
-                  Illustrative sample dataset for academic capstone demonstration — confirm real advising quotas and verification records with your department.
+                  Data profil, kuota, dan verifikasi bersifat sampel ilustratif untuk demonstrasi capstone — konfirmasikan kuota bimbingan resmi ke departemen Anda.
                 </p>
               </div>
               <div className="flex items-center space-x-4 text-[11px]">
                 <span className="inline-flex items-center space-x-1.5">
                   <span className="w-2 h-2 rounded-full bg-amber-500"></span>
-                  <span>Demo Dataset • 2026/2027</span>
+                  <span>Data Sampel Demo • 2026/2027</span>
                 </span>
                 <span>Next.js • TypeScript • Tailwind CSS</span>
               </div>

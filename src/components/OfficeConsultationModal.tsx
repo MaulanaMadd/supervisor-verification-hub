@@ -58,7 +58,7 @@ export default function OfficeConsultationModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Office Consultation Preparation Planner"
+      aria-label="Perencana Konsultasi Tatap Muka"
       className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4"
       onClick={onClose}
     >
@@ -75,7 +75,7 @@ export default function OfficeConsultationModal({
               </svg>
             </div>
             <div>
-              <h2 className="text-lg font-bold">Office Consultation Preparation Planner</h2>
+              <h2 className="text-lg font-bold">Perencana Konsultasi Tatap Muka</h2>
               <p className="text-xs text-blue-100">
                 Panduan Konsultasi Tatap Muka: {supervisor.name}
               </p>

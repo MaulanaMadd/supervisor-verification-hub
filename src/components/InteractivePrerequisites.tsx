@@ -35,7 +35,7 @@ export default function InteractivePrerequisites({
           <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
           </svg>
-          <span>Required Coursework & Prerequisites</span>
+          <span>Mata Kuliah & Prasyarat Wajib</span>
         </div>
 
         {!isSabbatical && totalCount > 0 && (
@@ -46,7 +46,7 @@ export default function InteractivePrerequisites({
                 : 'bg-white/10 text-blue-200 border border-white/15'
             }`}
           >
-            {completedCount}/{totalCount} Completed
+            {completedCount}/{totalCount} Terpenuhi
           </span>
         )}
       </div>

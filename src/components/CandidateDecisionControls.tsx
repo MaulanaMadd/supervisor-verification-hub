@@ -102,12 +102,12 @@ export default function CandidateDecisionControls({
           htmlFor={`status-${supervisorId}-${compact ? 'cmp' : 'sl'}`}
           className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
         >
-          Decision Status
+          Status Pertimbangan
         </label>
         <select
           id={`status-${supervisorId}-${compact ? 'cmp' : 'sl'}`}
           data-decision-status={supervisorId}
-          aria-label={`Decision status for ${supervisorName}`}
+          aria-label={`Status pertimbangan untuk ${supervisorName}`}
           value={currentStatus}
           onChange={(e) =>
             setDecisionStatus(supervisorId, e.target.value as DecisionStatus, supervisorName)
@@ -141,16 +141,16 @@ export default function CandidateDecisionControls({
             </svg>
             <span>
               {isNoteOpen
-                ? 'Hide Note'
+                ? 'Sembunyikan Catatan'
                 : savedNote
-                  ? 'Edit Decision Note'
-                  : 'Add Decision Note'}
+                  ? 'Ubah Catatan Pertimbangan'
+                  : 'Tambah Catatan Pertimbangan'}
             </span>
           </button>
 
           {justSaved && (
             <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-              Saved
+              Tersimpan
             </span>
           )}
         </div>
@@ -165,7 +165,7 @@ export default function CandidateDecisionControls({
                 : 'text-slate-400 dark:text-slate-500 italic'
             }`}
           >
-            {savedNote || 'No personal notes yet.'}
+            {savedNote || 'Belum ada catatan pertimbangan.'}
           </p>
         )}
 
@@ -174,17 +174,17 @@ export default function CandidateDecisionControls({
           <div className="mt-2 space-y-2">
             <textarea
               data-note-input={supervisorId}
-              aria-label={`Decision notes for ${supervisorName}`}
+              aria-label={`Catatan pertimbangan untuk ${supervisorName}`}
               rows={3}
               value={editorValue}
               onChange={(e) => setDraftNote(e.target.value)}
               onBlur={handleBlurNote}
-              placeholder="Write your reasoning (e.g., strong methodology fit, confirm slot availability, discuss co-supervisor)..."
+              placeholder="Tuliskan pertimbangan Anda (mis. metodologi sesuai, perlu konfirmasi sisa kuota, atau diskusikan co-supervisor)..."
               className="w-full p-2.5 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
             />
             <div className="flex items-center justify-between gap-2">
               <span className="text-[11px] text-slate-400">
-                {hasUnsavedChanges ? 'Auto-saves on blur or click Save' : 'Stored in browser'}
+                {hasUnsavedChanges ? 'Tersimpan otomatis saat keluar atau klik Simpan' : 'Tersimpan di browser'}
               </span>
               <div className="flex items-center space-x-1.5">
                 {editorValue.trim().length > 0 && (
@@ -193,7 +193,7 @@ export default function CandidateDecisionControls({
                     onClick={handleClearNote}
                     className="px-2 py-1 rounded text-[11px] font-medium text-slate-500 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400 transition-colors cursor-pointer"
                   >
-                    Clear
+                    Hapus
                   </button>
                 )}
                 <button
@@ -202,7 +202,7 @@ export default function CandidateDecisionControls({
                   onClick={handleSaveNote}
                   className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-colors cursor-pointer"
                 >
-                  Save Note
+                  Simpan Catatan
                 </button>
               </div>
             </div>

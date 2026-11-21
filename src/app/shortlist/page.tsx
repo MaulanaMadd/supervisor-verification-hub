@@ -65,14 +65,14 @@ export default function ShortlistPage() {
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>Saved Thesis Advisors</span>
+              <span>Daftar Kandidat Tersimpan</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Your Supervisor Shortlist
+              Kandidat Pilihan Anda
             </h1>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-              Review and manage the thesis supervisors you have saved from the directory. Select 2
-              to 3 shortlisted supervisors to compare them side-by-side.
+              Tinjau dan kelola calon dosen pembimbing yang telah Anda simpan dari direktori. Pilih 2
+              hingga 3 kandidat pilihan untuk membandingkannya secara berdampingan.
             </p>
           </div>
 
@@ -84,7 +84,7 @@ export default function ShortlistPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              <span>Back to Directory</span>
+              <span>Kembali ke Beranda</span>
             </Link>
 
             {isHydrated && shortlistedSupervisors.length > 0 && (
@@ -96,7 +96,7 @@ export default function ShortlistPage() {
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
-                <span>Clear All</span>
+                <span>Hapus Semua</span>
               </button>
             )}
           </div>
@@ -106,14 +106,13 @@ export default function ShortlistPage() {
         {isHydrated && (
           <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
             <div>
-              Total shortlisted:{' '}
+              Total kandidat pilihan:{' '}
               <span className="font-bold text-slate-900 dark:text-white">
-                {shortlistedSupervisors.length}{' '}
-                {shortlistedSupervisors.length === 1 ? 'supervisor' : 'supervisors'}
+                {shortlistedSupervisors.length} dosen pembimbing
               </span>
             </div>
             {shortlistedSupervisors.length > 0 && (
-              <span>Click the bookmark icon on any card to remove them from your shortlist.</span>
+              <span>Klik ikon marka buku pada kartu untuk menghapus dosen dari kandidat pilihan.</span>
             )}
           </div>
         )}
@@ -127,24 +126,24 @@ export default function ShortlistPage() {
         >
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
-              <span>Compare Shortlisted Supervisors</span>
+              <span>Bandingkan Kandidat Pilihan</span>
               <span
                 data-testid="compare-selected-count"
                 className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800"
               >
-                {selectedCount} / {MAX_COMPARE_COUNT} selected
+                {selectedCount} / {MAX_COMPARE_COUNT} dipilih
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {shortlistedSupervisors.length < MIN_COMPARE_COUNT
-                ? `Shortlist at least ${MIN_COMPARE_COUNT} supervisors to compare them side-by-side.`
+                ? `Simpan minimal ${MIN_COMPARE_COUNT} dosen pembimbing untuk membandingkannya secara berdampingan.`
                 : limitNotice
-                  ? `You can compare a maximum of ${MAX_COMPARE_COUNT} supervisors at once. Deselect one supervisor before selecting another.`
+                  ? `Anda dapat membandingkan maksimal ${MAX_COMPARE_COUNT} dosen pembimbing sekaligus. Batalkan satu pilihan sebelum memilih dosen lain.`
                   : selectedCount < MIN_COMPARE_COUNT
-                    ? `Select at least ${MIN_COMPARE_COUNT} supervisors (up to ${MAX_COMPARE_COUNT}) to enable side-by-side comparison.`
+                    ? `Pilih minimal ${MIN_COMPARE_COUNT} dosen (maksimal ${MAX_COMPARE_COUNT}) untuk mengaktifkan perbandingan berdampingan.`
                     : selectedCount === MAX_COMPARE_COUNT
-                      ? `Maximum of ${MAX_COMPARE_COUNT} supervisors selected. Ready to compare, or deselect one to swap.`
-                      : `${selectedCount} supervisors selected. Ready to compare, or select 1 more (max ${MAX_COMPARE_COUNT}).`}
+                      ? `Maksimal ${MAX_COMPARE_COUNT} dosen telah dipilih. Siap dibandingkan, atau batalkan satu pilihan untuk mengganti.`
+                      : `${selectedCount} dosen dipilih. Siap dibandingkan, atau pilih 1 dosen lagi (maksimal ${MAX_COMPARE_COUNT}).`}
             </p>
           </div>
 
@@ -158,7 +157,7 @@ export default function ShortlistPage() {
                 }}
                 className="px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               >
-                Clear Selection
+                Batalkan Pilihan
               </button>
             )}
             <button
@@ -175,7 +174,7 @@ export default function ShortlistPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
               </svg>
-              <span>Compare Selected{selectedCount > 0 ? ` (${selectedCount})` : ''}</span>
+              <span>Bandingkan Terpilih{selectedCount > 0 ? ` (${selectedCount})` : ''}</span>
             </button>
           </div>
         </div>
@@ -184,7 +183,7 @@ export default function ShortlistPage() {
       {/* Main Content */}
       {!isHydrated ? (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-12 text-center shadow-sm">
-          <p className="text-sm text-slate-500 dark:text-slate-400">Loading your shortlist...</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Memuat daftar kandidat pilihan...</p>
         </div>
       ) : shortlistedSupervisors.length === 0 ? (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-10 sm:p-14 text-center shadow-sm">
@@ -199,17 +198,17 @@ export default function ShortlistPage() {
             </svg>
           </div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-            Your shortlist is empty
+            Daftar kandidat pilihan masih kosong
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6 leading-relaxed">
-            You haven&apos;t saved any thesis supervisors yet. Browse the supervisor directory and
-            click the bookmark icon on any supervisor card or profile page to add them here.
+            Anda belum menyimpan calon dosen pembimbing. Jelajahi direktori dosen pembimbing lalu
+            klik ikon marka buku pada kartu atau halaman profil dosen untuk menyimpannya di sini.
           </p>
           <Link
             href="/"
             className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-sm"
           >
-            <span>Browse Supervisor Directory</span>
+            <span>Jelajahi Direktori Dosen</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -259,10 +258,10 @@ export default function ShortlistPage() {
                     </span>
                     <span>
                       {isSelected
-                        ? 'Selected for Comparison'
+                        ? 'Dipilih untuk Dibandingkan'
                         : isMaxBlocked
-                          ? `Max ${MAX_COMPARE_COUNT} Selected`
-                          : 'Select to Compare'}
+                          ? `Maksimal ${MAX_COMPARE_COUNT} Dipilih`
+                          : 'Pilih untuk Dibandingkan'}
                     </span>
                   </span>
                 </button>

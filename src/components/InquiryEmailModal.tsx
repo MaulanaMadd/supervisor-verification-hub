@@ -124,7 +124,7 @@ Program Studi Sistem Informasi`;
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Proposal and Inquiry Email Draft Generator"
+      aria-label="Pembuat Draf Pre-Proposal dan Email Bimbingan"
       className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4"
       onClick={onClose}
     >
@@ -143,8 +143,8 @@ Program Studi Sistem Informasi`;
             <div>
               <h2 className="text-lg font-bold">
                 {mode === 'draft-proposal'
-                  ? 'Pre-Proposal Inquiry Generator'
-                  : 'Thesis Advising Email Generator'}
+                  ? 'Pembuat Draf Pre-Proposal & Email'
+                  : 'Pembuat Draf Email Bimbingan Skripsi'}
               </h2>
               <p className="text-xs text-blue-100">
                 Kepada: {supervisor.name} ({recipientEmail})
@@ -352,7 +352,7 @@ Program Studi Sistem Informasi`;
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <span>Buka di Email Client</span>
+              <span>Buka di Aplikasi Email</span>
             </a>
           </div>
         </div>

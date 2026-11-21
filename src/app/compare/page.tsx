@@ -96,14 +96,14 @@ function ComparePageContent() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3 border border-blue-200 dark:border-blue-800">
-              <span>Side-by-Side Decision Support</span>
+              <span>Panduan Pengambilan Keputusan</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Supervisor Comparison
+              Perbandingan Dosen Pembimbing
             </h1>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-              Compare your shortlisted thesis supervisors across verification reliability, advising
-              capacity, research alignment, and recommended next actions.
+              Bandingkan kandidat pilihan Anda secara berdampingan berdasarkan status verifikasi,
+              ketersediaan bimbingan, kesesuaian bidang penelitian, dan rekomendasi tindak lanjut.
             </p>
           </div>
 
@@ -115,7 +115,7 @@ function ComparePageContent() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              <span>Return to Shortlist</span>
+              <span>Kembali ke Kandidat Pilihan</span>
             </Link>
           </div>
         </div>
@@ -129,21 +129,21 @@ function ComparePageContent() {
         >
           {invalidIds.length > 0 && (
             <p>
-              <strong>Unrecognized supervisor ID(s) skipped:</strong>{' '}
+              <strong>ID dosen tidak dikenali dan dilewati:</strong>{' '}
               <code className="font-mono">{invalidIds.join(', ')}</code>
             </p>
           )}
           {notShortlistedIds.length > 0 && (
             <p>
-              <strong>Excluded because not in your current shortlist:</strong>{' '}
-              {notShortlistedIds.join(', ')}. Comparison only includes supervisors currently saved
-              in your shortlist.
+              <strong>Tidak ditampilkan karena tidak berada di Kandidat Pilihan Anda:</strong>{' '}
+              {notShortlistedIds.join(', ')}. Perbandingan hanya menampilkan dosen yang tersimpan
+              dalam Kandidat Pilihan.
             </p>
           )}
           {exceededMax && (
             <p>
-              <strong>Maximum reached:</strong> Only the first {MAX_COMPARE_COUNT} selected
-              supervisors are displayed for readability.
+              <strong>Batas maksimal tercapai:</strong> Hanya {MAX_COMPARE_COUNT} dosen pertama
+              yang ditampilkan agar mudah dibaca.
             </p>
           )}
         </div>
@@ -153,7 +153,7 @@ function ComparePageContent() {
       {!isHydrated ? (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-12 text-center shadow-sm">
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Loading supervisor comparison...
+            Memuat perbandingan dosen pembimbing...
           </p>
         </div>
       ) : comparedSupervisors.length < MIN_COMPARE_COUNT ? (
@@ -164,26 +164,26 @@ function ComparePageContent() {
             </svg>
           </div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-            Select at least {MIN_COMPARE_COUNT} shortlisted supervisors to compare
+            Pilih minimal {MIN_COMPARE_COUNT} kandidat pilihan untuk dibandingkan
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6 leading-relaxed">
             {comparedSupervisors.length === 1
-              ? `Only 1 valid shortlisted supervisor (${comparedSupervisors[0].name}) is currently selected. Choose at least one more supervisor from your shortlist to view a side-by-side comparison.`
-              : 'Choose 2 to 3 supervisors from your shortlist to compare their verification status, advising availability, research profile, and recommended next actions.'}
+              ? `Saat ini hanya 1 kandidat pilihan yang valid (${comparedSupervisors[0].name}). Pilih minimal satu dosen lagi dari Kandidat Pilihan untuk melihat perbandingan berdampingan.`
+              : 'Belum ada dosen yang dipilih untuk dibandingkan. Pilih 2 hingga 3 dosen dari Kandidat Pilihan Anda untuk membandingkan status verifikasi, ketersediaan, bidang penelitian, dan rekomendasi tindak lanjut.'}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/shortlist"
               className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-sm"
             >
-              <span>Go to Shortlist</span>
+              <span>Buka Kandidat Pilihan</span>
             </Link>
             {shortlistedIds.length < MIN_COMPARE_COUNT && (
               <Link
                 href="/"
                 className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
               >
-                <span>Browse Supervisor Directory</span>
+                <span>Jelajahi Direktori Dosen</span>
               </Link>
             )}
           </div>
@@ -204,7 +204,7 @@ export default function ComparePage() {
     <Suspense
       fallback={
         <div className="py-12 text-center text-slate-500 text-sm">
-          Loading Supervisor Comparison...
+          Memuat Perbandingan Dosen Pembimbing...
         </div>
       }
     >
