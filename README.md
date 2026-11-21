@@ -3,7 +3,11 @@
 > **Information Systems Capstone Project (Q3.04 Foundation)**  
 > Department of Information Systems • Academic Advising Transparency Portal
 
-Supervisor Verification Hub (SVH) is a specialized web platform designed to help undergraduate Information Systems students evaluate potential thesis supervisors before submitting academic proposals. Instead of relying on word-of-mouth or outdated faculty directories, SVH provides verifiable data across six critical academic dimensions.
+Supervisor Verification Hub (SVH) is a specialized web platform designed to help undergraduate Information Systems students evaluate potential thesis supervisors before submitting academic proposals. Instead of relying on word-of-mouth or outdated faculty directories, SVH provides transparent, structured decision support across verification status, verification scope, information sources, freshness, advising availability, shortlisting, side-by-side comparison, and action execution.
+
+> **Complete Documentation & Visual Evidence:** See [`docs/README.md`](./docs/README.md) for the full capstone documentation package (Project Overview, Features, User Flow, Technical Architecture, Data & Transparency, Testing & QA, and 18 live application screenshots in `docs/evidence/screenshots/`).
+>
+> **Note:** Supervisor profiles, verification records, and quotas in this prototype use an illustrative sample dataset (`src/data/mockSupervisors.ts`) rather than live institutional SIAKAD data.
 
 ---
 

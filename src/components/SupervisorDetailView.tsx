@@ -1,8 +1,16 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Supervisor } from '@/types/supervisor';
 import VerificationBadge from './VerificationBadge';
 import AvailabilityBadge from './AvailabilityBadge';
 import FreshnessBadge from './FreshnessBadge';
+import InteractivePrerequisites from './InteractivePrerequisites';
+import InquiryEmailModal from './InquiryEmailModal';
+import OfficeConsultationModal from './OfficeConsultationModal';
+import CoSupervisorModal from './CoSupervisorModal';
+import ShortlistButton from './ShortlistButton';
 
 interface SupervisorDetailViewProps {
   supervisor: Supervisor;
@@ -11,6 +19,21 @@ interface SupervisorDetailViewProps {
 export default function SupervisorDetailView({ supervisor }: SupervisorDetailViewProps) {
   const verifiedScopeCount = supervisor.verificationScope.filter((s) => s.isVerified).length;
   const totalScopeCount = supervisor.verificationScope.length;
+
+  // Modal states
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [emailModalMode, setEmailModalMode] = useState<'draft-proposal' | 'email-inquiry'>('draft-proposal');
+  const [isOfficeModalOpen, setIsOfficeModalOpen] = useState(false);
+  const [isCoSupervisorModalOpen, setIsCoSupervisorModalOpen] = useState(false);
+
+  const actionType = supervisor.recommendedAction.actionType;
+  const isSabbatical = supervisor.availabilityStatus === 'on-sabbatical' || actionType === 'waitlist';
+  const primaryField = supervisor.researchFields[0] || 'Sistem Informasi';
+
+  const handleOpenEmailModal = (mode: 'draft-proposal' | 'email-inquiry') => {
+    setEmailModalMode(mode);
+    setIsEmailModalOpen(true);
+  };
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
@@ -58,18 +81,27 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
             </div>
 
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">
-                {supervisor.name}
-              </h1>
-              <p className="text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mt-1">
-                {supervisor.academicTitle}
-              </p>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                {supervisor.role} • {supervisor.department}
-              </p>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
-                {supervisor.faculty}
-              </p>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="min-w-0">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                    {supervisor.name}
+                  </h1>
+                  <p className="text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mt-1">
+                    {supervisor.academicTitle}
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                    {supervisor.role} • {supervisor.department}
+                  </p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
+                    {supervisor.faculty}
+                  </p>
+                </div>
+                <ShortlistButton
+                  supervisorId={supervisor.id}
+                  supervisorName={supervisor.name}
+                  variant="button"
+                />
+              </div>
             </div>
           </div>
 
@@ -116,30 +148,32 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
         </div>
       </div>
 
-      {/* HIGHLIGHT: Recommended Next Action Card */}
-      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-800/80 text-blue-200 text-xs font-semibold uppercase tracking-wider border border-blue-700">
-            <svg className="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <span>Recommended Next Action for Students</span>
+      {/* HIGHLIGHT: Adaptive Action Execution Hub Card */}
+      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-md space-y-6">
+        <div>
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-800/80 text-blue-200 text-xs font-semibold uppercase tracking-wider border border-blue-700">
+              <svg className="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>Recommended Next Action for Students</span>
+            </div>
+
+            <span className="text-xs bg-white/10 px-2.5 py-1 rounded text-blue-100 font-mono">
+              Action: {supervisor.recommendedAction.actionTypeLabel}
+            </span>
           </div>
 
-          <span className="text-xs bg-white/10 px-2.5 py-1 rounded text-blue-100 font-mono">
-            Action: {supervisor.recommendedAction.actionTypeLabel}
-          </span>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+            {supervisor.recommendedAction.headline}
+          </h2>
+          <p className="text-blue-100 text-sm leading-relaxed">
+            {supervisor.recommendedAction.summary}
+          </p>
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
-          {supervisor.recommendedAction.headline}
-        </h2>
-        <p className="text-blue-100 text-sm mb-6 leading-relaxed">
-          {supervisor.recommendedAction.summary}
-        </p>
-
         {/* Step by step action roadmap */}
-        <div className="bg-slate-900/60 rounded-xl p-5 border border-blue-700/50 space-y-3 mb-6">
+        <div className="bg-slate-900/60 rounded-xl p-5 border border-blue-700/50 space-y-3">
           <div className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">
             Action Steps Before Contacting Supervisor:
           </div>
@@ -155,44 +189,96 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
           </ol>
         </div>
 
-        {/* Prerequisites Checklist */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="bg-white/5 rounded-lg p-3.5 border border-white/10">
-            <div className="font-semibold text-blue-200 mb-1.5 flex items-center space-x-1.5">
-              <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span>Required Coursework & Prerequisites</span>
-            </div>
-            <ul className="list-disc list-inside space-y-1 text-slate-200">
-              {supervisor.recommendedAction.prerequisites.map((req, i) => (
-                <li key={i}>{req}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="bg-white/5 rounded-lg p-3.5 border border-white/10 flex flex-col justify-between">
+        {/* Dynamic Action Execution CTA Area */}
+        <div className="p-5 rounded-xl bg-white/10 border border-white/15 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <div className="font-semibold text-blue-200 mb-1 flex items-center space-x-1.5">
-                <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Preferred Consultation Timing</span>
+              <div className="text-xs font-bold uppercase tracking-wider text-blue-200">
+                Action Execution Hub
               </div>
-              <p className="text-slate-200 text-xs">
-                {supervisor.recommendedAction.preferredOfficeHours}
+              <p className="text-xs text-blue-100/90 mt-0.5">
+                {isSabbatical
+                  ? 'Dosen sedang cuti akademik. Silakan jelajahi alternatif pembimbing di bidang riset yang sama.'
+                  : 'Gunakan panduan dan template terstruktur untuk memulai kontak resmi secara profesional.'}
               </p>
             </div>
-            <div className="mt-3">
-              <a
-                href={`mailto:${supervisor.recommendedAction.contactEmail}`}
-                className="inline-flex items-center space-x-1.5 text-xs font-semibold bg-white text-slate-900 hover:bg-blue-50 px-3 py-1.5 rounded transition-colors"
-              >
-                <span>Draft Inquiry to {supervisor.recommendedAction.contactEmail}</span>
-              </a>
+
+            {/* ADAPTIVE BUTTONS BASED ON ACTION TYPE */}
+            <div>
+              {actionType === 'draft-proposal' && (
+                <button
+                  type="button"
+                  onClick={() => handleOpenEmailModal('draft-proposal')}
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-500/30 transition-colors cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  <span>Siapkan Draf Pre-Proposal & Email Inkuiri</span>
+                </button>
+              )}
+
+              {actionType === 'email-inquiry' && (
+                <button
+                  type="button"
+                  onClick={() => handleOpenEmailModal('email-inquiry')}
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold shadow-lg shadow-blue-500/30 transition-colors cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span>Buka Generator Email Bimbingan Skripsi</span>
+                </button>
+              )}
+
+              {actionType === 'office-visit' && (
+                <button
+                  type="button"
+                  onClick={() => setIsOfficeModalOpen(true)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold shadow-lg shadow-indigo-500/30 transition-colors cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  <span>Buka Panduan & Checklist Konsultasi</span>
+                </button>
+              )}
+
+              {actionType === 'co-supervisor-required' && (
+                <button
+                  type="button"
+                  onClick={() => setIsCoSupervisorModalOpen(true)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-lg shadow-amber-500/30 transition-colors cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span>Panduan Pemilihan Co-Supervisor</span>
+                </button>
+              )}
+
+              {/* Sabbatical / Waitlist: Strictly NO email inquiry CTA */}
+              {isSabbatical && (
+                <Link
+                  href={`/?field=${encodeURIComponent(primaryField)}`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-white text-slate-900 hover:bg-blue-50 text-xs font-bold shadow-md transition-colors"
+                >
+                  <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <span>Cari Dosen Alternatif di Bidang {primaryField}</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
+
+        {/* Interactive Prerequisite Self-Assessment Checklist */}
+        <InteractivePrerequisites
+          prerequisites={supervisor.recommendedAction.prerequisites}
+          supervisorName={supervisor.name}
+          isSabbatical={isSabbatical}
+        />
       </div>
 
       {/* Two Column Grid: Verification Scope & Information Sources */}
@@ -441,6 +527,26 @@ export default function SupervisorDetailView({ supervisor }: SupervisorDetailVie
           </div>
         )}
       </div>
+
+      {/* Render Modals */}
+      <InquiryEmailModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        supervisor={supervisor}
+        mode={emailModalMode}
+      />
+
+      <OfficeConsultationModal
+        isOpen={isOfficeModalOpen}
+        onClose={() => setIsOfficeModalOpen(false)}
+        supervisor={supervisor}
+      />
+
+      <CoSupervisorModal
+        isOpen={isCoSupervisorModalOpen}
+        onClose={() => setIsCoSupervisorModalOpen(false)}
+        supervisor={supervisor}
+      />
     </div>
   );
 }

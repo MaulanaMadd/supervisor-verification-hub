@@ -1,21 +1,32 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { MOCK_SUPERVISORS, RESEARCH_FIELDS } from '@/data/mockSupervisors';
 import { VerificationStatus, AvailabilityStatus } from '@/types/supervisor';
 import SupervisorCard from '@/components/SupervisorCard';
 import SearchAndFilterBar from '@/components/SearchAndFilterBar';
 
-export default function SupervisorDirectoryPage() {
+function SupervisorDirectoryContent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const fieldParam = searchParams.get('field');
+  const validParamField = fieldParam && RESEARCH_FIELDS.includes(fieldParam) ? fieldParam : null;
+
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<VerificationStatus | 'all'>('all');
-  const [fieldFilter, setFieldFilter] = useState<string>('All Fields');
+  const [userFieldFilter, setUserFieldFilter] = useState<string | null>(null);
   const [availabilityFilter, setAvailabilityFilter] = useState<AvailabilityStatus | 'all'>('all');
+
+  // Derive active field filter: user manual selection takes precedence; otherwise URL param; otherwise 'All Fields'
+  const activeFieldFilter = userFieldFilter ?? (validParamField || 'All Fields');
 
   // Filtered supervisor list
   const filteredSupervisors = useMemo(() => {
     return MOCK_SUPERVISORS.filter((supervisor) => {
-      // 1. Text Search (Matches supervisor name, academic title, research fields, or thesis focus)
+      // 1. Text Search (Matches supervisor name, academic title, research fields, thesis focus, bio, methodologies)
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim();
         const matchesName = supervisor.name.toLowerCase().includes(query);
@@ -27,8 +38,18 @@ export default function SupervisorDirectoryPage() {
           topic.toLowerCase().includes(query)
         );
         const matchesBio = supervisor.bio.toLowerCase().includes(query);
+        const matchesMethodologies = supervisor.methodologies.some((method) =>
+          method.toLowerCase().includes(query)
+        );
 
-        if (!matchesName && !matchesTitle && !matchesFields && !matchesTopics && !matchesBio) {
+        if (
+          !matchesName &&
+          !matchesTitle &&
+          !matchesFields &&
+          !matchesTopics &&
+          !matchesBio &&
+          !matchesMethodologies
+        ) {
           return false;
         }
       }
@@ -39,8 +60,8 @@ export default function SupervisorDirectoryPage() {
       }
 
       // 3. Research Field Filter
-      if (fieldFilter !== 'All Fields') {
-        const hasField = supervisor.researchFields.includes(fieldFilter);
+      if (activeFieldFilter !== 'All Fields') {
+        const hasField = supervisor.researchFields.includes(activeFieldFilter);
         if (!hasField) return false;
       }
 
@@ -53,13 +74,24 @@ export default function SupervisorDirectoryPage() {
 
       return true;
     });
-  }, [searchQuery, statusFilter, fieldFilter, availabilityFilter]);
+  }, [searchQuery, statusFilter, activeFieldFilter, availabilityFilter]);
+
+  const handleFieldFilterChange = (field: string) => {
+    setUserFieldFilter(field);
+    // Clear URL param when manually changing field filter
+    if (searchParams.get('field')) {
+      router.replace(pathname, { scroll: false });
+    }
+  };
 
   const handleResetFilters = () => {
     setSearchQuery('');
     setStatusFilter('all');
-    setFieldFilter('All Fields');
+    setUserFieldFilter('All Fields');
     setAvailabilityFilter('all');
+    if (searchParams.get('field')) {
+      router.replace(pathname, { scroll: false });
+    }
   };
 
   // Quick statistics
@@ -129,8 +161,8 @@ export default function SupervisorDirectoryPage() {
         onSearchChange={setSearchQuery}
         statusFilter={statusFilter}
         onStatusFilterChange={setStatusFilter}
-        fieldFilter={fieldFilter}
-        onFieldFilterChange={setFieldFilter}
+        fieldFilter={activeFieldFilter}
+        onFieldFilterChange={handleFieldFilterChange}
         availabilityFilter={availabilityFilter}
         onAvailabilityFilterChange={setAvailabilityFilter}
         availableFields={RESEARCH_FIELDS}
@@ -164,6 +196,7 @@ export default function SupervisorDirectoryPage() {
             No supervisor matched your current search &quot;{searchQuery}&quot; or filter criteria. Try adjusting the verification status or resetting all filters.
           </p>
           <button
+            type="button"
             onClick={handleResetFilters}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm"
           >
@@ -172,5 +205,19 @@ export default function SupervisorDirectoryPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SupervisorDirectoryPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-12 text-center text-slate-500 text-sm">
+          Loading Supervisor Directory...
+        </div>
+      }
+    >
+      <SupervisorDirectoryContent />
+    </Suspense>
   );
 }

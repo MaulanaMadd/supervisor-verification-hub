@@ -398,7 +398,7 @@ export const MOCK_SUPERVISORS: Supervisor[] = [
         id: 'scope-quota',
         label: 'Advising Quota & Slot Availability',
         isVerified: false,
-        notes: 'Under review. Currently at maximum standard capacity (4/4); requesting 2 extra quota slots.'
+        notes: 'Currently at full capacity (4/4 ratified slots filled). Formal proposal for +2 expansion slots is pending senate review.'
       },
       {
         id: 'scope-guidelines',
@@ -439,8 +439,8 @@ export const MOCK_SUPERVISORS: Supervisor[] = [
       category: 'moderate',
       freshnessLabel: 'Submitted 10 days ago (In Review)'
     },
-    availabilityStatus: 'limited',
-    availabilityLabel: 'Tentative Expansion (Awaiting Senate Approval)',
+    availabilityStatus: 'full',
+    availabilityLabel: 'Quota Full (4/4) • Expansion Pending Senate Review',
     quota: {
       total: 4,
       filled: 4,
@@ -448,15 +448,15 @@ export const MOCK_SUPERVISORS: Supervisor[] = [
       semester: 'Odd Semester 2026/2027'
     },
     recommendedAction: {
-      headline: 'Consult Academic Coordinator & Identify Co-Supervisor Candidate',
+      headline: 'Standard Quota Full; Consult Coordinator on Pending Expansion & Co-Supervisor Option',
       actionType: 'co-supervisor-required',
-      actionTypeLabel: 'Identify Secondary Co-Supervisor',
-      summary: 'Because Dr. Aris is awaiting senate approval for extra quota slots, students must prepare a co-supervisor strategy to prevent thesis registration delays.',
+      actionTypeLabel: 'Identify Secondary Co-Supervisor / Await Expansion',
+      summary: 'Dr. Aris is currently at maximum capacity (4/4 slots occupied). A memo requesting 2 expansion slots is pending senate approval; students must prepare a co-supervisor alternative or verify approval status before submitting.',
       actionSteps: [
         'Check with Department Academic Coordinator (Pak Irfan) whether Dr. Aris’s quota expansion has passed.',
         'Identify an eligible co-supervisor with compatible domain interests (e.g., Cloud Infrastructure or Information Systems Auditing).',
         'Prepare a draft title and abstract centered on ISO 27001 or Blockchain architecture.',
-        'Attend Thursday office hours (14:00 WIB, Room D-215) to seek provisional approval pending senate sign-off.'
+        'Attend Thursday office hours (14:00 WIB, Room D-215) to seek provisional guidance pending senate sign-off.'
       ],
       prerequisites: [
         'Completed Information Security & Risk Management (IS-312) with grade B+ or higher',

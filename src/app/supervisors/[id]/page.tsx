@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { MOCK_SUPERVISORS } from '@/data/mockSupervisors';
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function SupervisorDetailPage({ params }: PageProps) {
+async function SupervisorDetailLoader({ params }: PageProps) {
   const { id } = await params;
   const supervisor = MOCK_SUPERVISORS.find((s) => s.id === id);
 
@@ -38,4 +39,18 @@ export default async function SupervisorDetailPage({ params }: PageProps) {
   }
 
   return <SupervisorDetailView supervisor={supervisor} />;
+}
+
+export default function SupervisorDetailPage({ params }: PageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-12 text-center text-slate-500 text-sm">
+          Loading Supervisor Profile...
+        </div>
+      }
+    >
+      <SupervisorDetailLoader params={params} />
+    </Suspense>
+  );
 }
