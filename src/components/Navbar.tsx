@@ -20,12 +20,13 @@ export default function Navbar() {
               <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-lg text-white shadow-md shadow-blue-500/20 group-hover:bg-blue-500 transition-colors">
                 SVH
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-base sm:text-lg tracking-tight text-white">
-                    Supervisor Verification Hub
+                  <span className="font-semibold text-sm sm:text-lg tracking-tight text-white whitespace-nowrap">
+                    <span className="sm:hidden">SVH Portal</span>
+                    <span className="hidden sm:inline">Supervisor Verification Hub</span>
                   </span>
-                  <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-950 text-blue-300 border border-blue-800">
+                  <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-950 text-blue-300 border border-blue-800 whitespace-nowrap">
                     Capstone SI
                   </span>
                 </div>
@@ -79,7 +80,10 @@ export default function Navbar() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
-                <span>Kandidat Pilihan</span>
+                <span className="whitespace-nowrap">
+                  <span className="sm:hidden">Pilihan</span>
+                  <span className="hidden sm:inline">Kandidat Pilihan</span>
+                </span>
                 {isHydrated && count > 0 && (
                   <span
                     data-testid="navbar-shortlist-count"
